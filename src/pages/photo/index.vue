@@ -53,7 +53,26 @@
         @click="chooseImage('camera')">去拍照</u-button>
     </div>
     <!-- 加载页 -->
-    <u-loading-page :loading="loading" loading-text="正在生成中..." bg-color="#fff" />
+    <!-- 加载页 -->
+    <u-loading-page 
+      :loading="loading" 
+      loading-text="正在生成中..." 
+      :loading-mode="loadingMode"
+      loading-icon-size="28"
+      loading-icon-color="#F77261"
+      bg-color="rgba(255, 255, 255, 0.9)"
+      :custom-style="{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }"
+    >
+      <view class="loading-text" style="margin-top: 20rpx; color: #666; font-size: 28rpx;">
+        请稍候...
+      </view>
+    </u-loading-page>
+    <!-- <u-loading-page :loading="loading" loading-text="正在生成中..." bg-color="#fff" /> -->
   </view>
 </template>
 
@@ -77,6 +96,8 @@ export default class PhotoIndex extends Vue {
     face_detect_model: "mtcnn"
   }
   colors = Colors.slice(0, 5)
+  
+  loadingMode: string = 'circle'
   //本地文件地址
   imagePath: string = ''
   //图片预览遮罩
