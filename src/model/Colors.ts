@@ -1,4 +1,4 @@
-export const a = [
+export const Colors = [
   "#D9001B", //红底
   "#02A7F0", //蓝底
   "#FFFFFF", //白底
@@ -6,7 +6,7 @@ export const a = [
   "#3D99E2", //渐变懒2
 ];
 
-export const Colors = [
+export const a = [
   "#428eda",
   "#D9001B", //红底
   "#539fed",

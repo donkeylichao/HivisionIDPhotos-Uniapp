@@ -2,7 +2,11 @@
   <div class="photo-edit">
     <div class="preview-box">
       <div class="photo-box"
-        :style="{ 'height': imageHeight, 'width': imageWidth, 'background-color': IDPhotoForm.color }">
+        :style="{ 
+          'height': imageHeight, 
+          'width': imageWidth, 
+          'background': isGradient ? `linear-gradient(to bottom, ${IDPhotoForm.color}, transparent)` : IDPhotoForm.color
+        }">
         <u-image class="photo" :src="isHd ? photoPath.base64HD : photoPath.base64" mode="aspectFit" :width="imageWidth"
           :height="imageHeight" />
       </div>
@@ -20,6 +24,10 @@
     <u-form>
       <u-form-item label="是否高清" label-width="80">
         <u-switch v-model="isHd" activeColor="#F77261"></u-switch>
+      </u-form-item>
+
+      <u-form-item label="渐变背景" label-width="80">
+        <u-switch v-model="isGradient" activeColor="#F77261"></u-switch>
       </u-form-item>
     </u-form>
     <div class="selection-card selection-gap">
@@ -70,6 +78,8 @@ export default class PhotoEdit extends Vue {
   idPhotoTempPath: string = ''
   //排版照文件临时地址
   layoutPhotoTempPath: string = ''
+  //是否渐变背景
+  isGradient: boolean = false
 
   //vuex中的图片大小信息
   @Getter('photoConfig') photoSize!: PhotoSize
@@ -122,7 +132,7 @@ export default class PhotoEdit extends Vue {
     uni.showLoading({
       title: '正在处理中...'
     });
-    const { photoPath: photo, IDPhotoForm, isHd } = this
+    const { photoPath: photo, IDPhotoForm, isHd, isGradient } = this
     const that = this
     if (IDPhotoForm.kb === undefined) {
       delete IDPhotoForm.kb
@@ -131,6 +141,8 @@ export default class PhotoEdit extends Vue {
     const form = cloneDeep(IDPhotoForm)
     //去掉颜色的前缀
     form.color = form.color.replace('#', '')
+    // 渐变
+    IDPhotoForm.render = isGradient ? 1 : 0
     await AddBackgroudColor(IDPhotoForm, 'input_image', isHd ? photo.base64Path : photo.base64HDPath)
       .then((res) => {
         const colorBase64 = res['image_base64']
@@ -175,7 +187,7 @@ export default class PhotoEdit extends Vue {
     });
     //先生成带底色证件照
     const that = this
-    const { photoSize, IDPhotoForm, isHd, photoPath: photo } = this
+    const { photoSize, IDPhotoForm, isHd, isGradient, photoPath: photo } = this
     const layoutPhotoForm = {
       height: photoSize.pxHeight,
       width: photoSize.pxWidth,
@@ -192,6 +204,8 @@ export default class PhotoEdit extends Vue {
     idFormCopy.color = idFormCopy.color.replace('#', '')
     //根据选择查看是否生成高清图
     const targetBase64 = isHd ? photo.base64Path : photo.base64HDPath
+    // 渐变
+    idFormCopy.render = isGradient ? 1 : 0
     //获取带背景色的图
     const { image_base64: colorBase64 } = await AddBackgroudColor(idFormCopy, 'input_image', targetBase64)
     const handledColorBase64 = colorBase64.replace(prefix, "")
