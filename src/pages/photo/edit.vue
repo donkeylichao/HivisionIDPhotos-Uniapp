@@ -143,7 +143,7 @@ export default class PhotoEdit extends Vue {
     form.color = form.color.replace('#', '')
     // 渐变
     IDPhotoForm.render = isGradient ? 1 : 0
-    await AddBackgroudColor(IDPhotoForm, 'input_image', isHd ? photo.base64Path : photo.base64HDPath)
+    await AddBackgroudColor(IDPhotoForm, 'input_image', isHd ? photo.base64HDPath : photo.base64Path)
       .then((res) => {
         const colorBase64 = res['image_base64']
         if (colorBase64 === undefined) {
@@ -203,7 +203,7 @@ export default class PhotoEdit extends Vue {
     //去掉颜色的前缀
     idFormCopy.color = idFormCopy.color.replace('#', '')
     //根据选择查看是否生成高清图
-    const targetBase64 = isHd ? photo.base64Path : photo.base64HDPath
+    const targetBase64 = isHd ? photo.base64HDPath : photo.base64Path
     // 渐变
     idFormCopy.render = isGradient ? 1 : 0
     //获取带背景色的图
