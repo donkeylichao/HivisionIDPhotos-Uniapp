@@ -12,13 +12,13 @@
 		{
 			"path": "pages/photo/index",
 			"style": {
-				"navigationBarTitleText": "最美AI证件照"
+				"navigationBarTitleText": "AI证照助手"
 			}
 		},
 		{
 			"path": "pages/photo/edit",
 			"style": {
-				"navigationBarTitleText": "最美AI证件照"
+				"navigationBarTitleText": "AI证照助手"
 			}
 		},
 		{
@@ -30,7 +30,7 @@
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "最美AI证件照",
+		"navigationBarTitleText": "AI证照助手",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	}
