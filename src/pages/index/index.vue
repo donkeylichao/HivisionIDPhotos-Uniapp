@@ -81,7 +81,7 @@ const DPICoefficient = 25.4
 export default class Index extends Vue {
 	//轮播图
 	banners: Array<string> = [
-		'https://cdn.icuzz.com/photo/tiny-banner.png',
+		'https://yanglc.oss-cn-beijing.aliyuncs.com/tiny-banner.png',
 	]
 	//热门照片尺寸
 	hostList = photoSizes.slice(0, 10)
